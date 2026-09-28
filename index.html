@@ -6,20 +6,30 @@
 #menu #mascotWrap{height:82px;margin:0 0 2px}
 
 .mcsActionMascot{
-  min-height:140px;
+  position:fixed;
+  right:10px;
+  bottom:88px;
+  z-index:9999;
+  width:118px;
+  height:118px;
   display:flex;
   align-items:flex-end;
-  justify-content:center;
-  margin:8px auto 4px;
+  justify-content:flex-end;
+  margin:0;
+  pointer-events:none;
 }
 .mcsActionMascot img{
   display:block;
   width:auto;
   height:auto;
-  max-height:135px;
-  max-width:170px;
+  max-height:118px;
+  max-width:118px;
   object-fit:contain;
-  filter:drop-shadow(0 4px 6px rgba(0,0,0,.10));
+  filter:drop-shadow(0 4px 7px rgba(0,0,0,.16));
+}
+@media (max-width:390px){
+  .mcsActionMascot{right:6px;bottom:82px;width:105px;height:105px}
+  .mcsActionMascot img{max-width:105px;max-height:105px}
 }
 </style></head><body><div class=w><h2>👂 耳つぼ どこやねん！</h2><div class=sub>耳の地図を遊んで覚えるゲーム</div>
 <div id=menu class=c><div id="mascotWrap"><img id="menuMascot" src="mcs_start.PNG" alt=""></div><b>何問いく？🤣</b><div class=choice><button data-n=10>サクッと<br>10問</button><button data-n=20>しっかり<br>20問</button><button data-n=50>地獄の<br>全50問</button></div><div class=sub>毎回ランダム出題やで👌</div><div class=sub style="margin-top:10px">※耳の形や位置には個人差があります。このゲームは位置関係をざっくり楽しく覚えるための学習用です。細かい位置・判断が難しい場所は、必ず協会テキストで確認してください。</div></div>
