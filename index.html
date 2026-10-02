@@ -149,8 +149,25 @@
 body.playing #mcsCornerLogo{display:block}
 @media(max-width:380px){#mcsCornerLogo{width:46px;height:46px}}
 
-</style></head><body><img id="mcsCornerLogo" src="mcs_logo.JPG" alt="MCS"><div class=w><div id=menu class=c><div id="brandHeader"><img class="mcsLogo" src="mcs_logo.JPG" alt="Mimitubo Care School MCS"><h2 class="brandTitle">👂 耳つぼ どこやねん！</h2><div class="sub brandSub">耳の地図を遊んで覚えるゲーム</div></div><div id="mascotWrap"><img id="menuMascot" src="mcs_start.PNG" alt=""></div><b>何問いく？🤣</b><div class=choice><button data-n=10>サクッと<br>10問</button><button data-n=20>しっかり<br>20問</button><button data-n=50>地獄の<br>全50問</button></div><div class=sub>毎回ランダム出題やで👌</div><div class=sub style="margin-top:10px">※耳の形や位置には個人差があります。このゲームは位置関係をざっくり楽しく覚えるための学習用です。細かい位置・判断が難しい場所は、必ず協会テキストで確認してください。</div></div>
-<div id=game class=hide><div class=stats><div>TIME<br><b id=time>00:00</b></div><div>正解<br><b id=ok>0</b></div><div>ミス<br><b id=miss>0</b></div><div>スルー<br><b id=skips>0</b></div></div><div class=c><small id=side></small><div id=q></div><div class=ear id=ear><img id=img src=ear_base.PNG><span id=mark></span><div id=pop></div></div><div id=msg></div><div class="nearBtns"><button id=next class=hide>➡️ 次の札</button><div id="reviewBox" class="reviewBox hide">
+
+/* v7: MCSロゴをゲームカード左上に直接配置 */
+#game{position:relative}
+#game .gameMcsLogo{
+  position:absolute;
+  left:10px;
+  top:10px;
+  width:52px;
+  height:52px;
+  object-fit:contain;
+  border-radius:50%;
+  z-index:50;
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.12));
+}
+@media(max-width:380px){
+  #game .gameMcsLogo{width:46px;height:46px;left:8px;top:8px}
+}
+</style></head><body><div class=w><div id=menu class=c><div id="brandHeader"><img class="mcsLogo" src="mcs_logo.JPG" alt="Mimitubo Care School MCS"><h2 class="brandTitle">👂 耳つぼ どこやねん！</h2><div class="sub brandSub">耳の地図を遊んで覚えるゲーム</div></div><div id="mascotWrap"><img id="menuMascot" src="mcs_start.PNG" alt=""></div><b>何問いく？🤣</b><div class=choice><button data-n=10>サクッと<br>10問</button><button data-n=20>しっかり<br>20問</button><button data-n=50>地獄の<br>全50問</button></div><div class=sub>毎回ランダム出題やで👌</div><div class=sub style="margin-top:10px">※耳の形や位置には個人差があります。このゲームは位置関係をざっくり楽しく覚えるための学習用です。細かい位置・判断が難しい場所は、必ず協会テキストで確認してください。</div></div>
+<div id=game class=hide><img class="gameMcsLogo" src="mcs_logo.JPG" alt="MCS"><div class=stats><div>TIME<br><b id=time>00:00</b></div><div>正解<br><b id=ok>0</b></div><div>ミス<br><b id=miss>0</b></div><div>スルー<br><b id=skips>0</b></div></div><div class=c><small id=side></small><div id=q></div><div class=ear id=ear><img id=img src=ear_base.PNG><span id=mark></span><div id=pop></div></div><div id=msg></div><div class="nearBtns"><button id=next class=hide>➡️ 次の札</button><div id="reviewBox" class="reviewBox hide">
 <b>📚 苦手だけ再復習</b>
 <div id="reviewList" class="reviewList"></div>
 <button id="reviewBtn" class="reviewBtn">🔁 間違えたとこだけ再挑戦</button>
@@ -203,17 +220,5 @@ function setMascot(file){
   if(el){ el.src=file; }
 }
 </script>
-<script>
-(function(){
-  const gameEl=document.getElementById("game");
-  function syncMcsBadge(){
-    const playing=gameEl && !gameEl.classList.contains("hide");
-    document.body.classList.toggle("playing",playing);
-  }
-  if(gameEl){
-    new MutationObserver(syncMcsBadge).observe(gameEl,{attributes:true,attributeFilter:["class"]});
-    syncMcsBadge();
-  }
-})();
-</script>
+
 </body></html>
