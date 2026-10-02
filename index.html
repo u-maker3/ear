@@ -108,6 +108,24 @@
   #game #msg{font-size:13px;min-height:20px}
 }
 
+
+/* v3: ゲーム中はブランド部を画面外へ送り、問題エリアを見やすく */
+#game{margin-top:8px}
+#game .ear{
+  width:min(78vw,330px,52vh);
+  margin:4px auto;
+}
+#game #q{font-size:clamp(28px,8vw,36px);margin:2px 0 4px}
+#game #side{font-size:13px}
+#game #msg{min-height:30px;font-size:17px;line-height:1.15}
+#game button{padding:10px 15px;font-size:16px;margin:3px}
+@media (max-height:800px){
+  #game .stats{display:none}
+  #game .ear{width:min(75vw,315px,49vh)}
+}
+@media (max-height:700px){
+  #game .ear{width:min(70vw,290px,45vh)}
+}
 </style></head><body><div class=w><img class="mcsLogo" src="mcs_logo.JPG" alt="Mimitubo Care School MCS"><h2 class="brandTitle">👂 耳つぼ どこやねん！</h2><div class="sub brandSub">耳の地図を遊んで覚えるゲーム</div>
 <div id=menu class=c><div id="mascotWrap"><img id="menuMascot" src="mcs_start.PNG" alt=""></div><b>何問いく？🤣</b><div class=choice><button data-n=10>サクッと<br>10問</button><button data-n=20>しっかり<br>20問</button><button data-n=50>地獄の<br>全50問</button></div><div class=sub>毎回ランダム出題やで👌</div><div class=sub style="margin-top:10px">※耳の形や位置には個人差があります。このゲームは位置関係をざっくり楽しく覚えるための学習用です。細かい位置・判断が難しい場所は、必ず協会テキストで確認してください。</div></div>
 <div id=game class=hide><div class=stats><div>TIME<br><b id=time>00:00</b></div><div>正解<br><b id=ok>0</b></div><div>ミス<br><b id=miss>0</b></div><div>スルー<br><b id=skips>0</b></div></div><div class=c><small id=side></small><div id=q></div><div class=ear id=ear><img id=img src=ear_base.PNG><span id=mark></span><div id=pop></div></div><div id=msg></div><div class="nearBtns"><button id=next class=hide>➡️ 次の札</button><div id="reviewBox" class="reviewBox hide">
@@ -143,7 +161,7 @@ function advance(){
    }
  }else show()
 }
-document.querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>{let n=+b.dataset.n;D=sh([...ALL]).slice(0,n);i=o=m=s=0;wrongSet=new Set();reviewMode=false;ok.textContent=miss.textContent=skips.textContent=0;menu.className="hide";game.className="";t0=Date.now();clearInterval(T);T=setInterval(tick,500);show()});
+document.querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>{let n=+b.dataset.n;D=sh([...ALL]).slice(0,n);i=o=m=s=0;wrongSet=new Set();reviewMode=false;ok.textContent=miss.textContent=skips.textContent=0;menu.className="hide";game.className="";t0=Date.now();clearInterval(T);T=setInterval(tick,500);show();setTimeout(()=>game.scrollIntoView({behavior:"smooth",block:"start"}),60)});
 next.onclick=advance;skip.onclick=()=>{if(lock)return;wrongSet.add(D[i]);s++;skips.textContent=s;setMascot("mcs_skip.PNG");pop.innerHTML="🙈 スルー！<br><span style=\"font-size:14px\">テキスト見よ🤣</span>";pop.className="show";lock=true;setTimeout(advance,650)};
 
 
@@ -153,7 +171,7 @@ reviewBtn.onclick=()=>{
  D=sh(bad);i=o=m=s=0;wrongSet=new Set();reviewMode=true;
  ok.textContent=miss.textContent=skips.textContent=0;
  reviewBox.className="reviewBox hide";skip.className="skipBtn";
- t0=Date.now();clearInterval(T);T=setInterval(tick,500);show();
+ t0=Date.now();clearInterval(T);T=setInterval(tick,500);show();setTimeout(()=>game.scrollIntoView({behavior:"smooth",block:"start"}),60);
 };
 
 homeBtn.onclick=()=>{clearInterval(T);reviewBox.className="reviewBox hide";game.className="hide";menu.className="c";skip.className="skipBtn";wrongSet=new Set();reviewMode=false;};
